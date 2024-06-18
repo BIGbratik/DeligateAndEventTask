@@ -10,9 +10,13 @@ namespace MeDeligateAndEventTask
     {
         public static T GetMax<T> (this IEnumerable<T> collection, Func<T, double> convertToNumber)
         {
-            var maxValue = double.MinValue;
-            T maxItem = default;
+            if (!collection.Any())
+            {
+                throw new ArgumentException("В коллекции нет ни одного элемента");
+            }
 
+            var maxValue = double.MinValue;
+            T maxItem = collection.First();
 
             foreach (var item in collection)
             {
